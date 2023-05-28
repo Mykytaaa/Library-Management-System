@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Home Page</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet"href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<link rel="stylesheet"href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<!--	<link rel="stylesheet" th:href="@{/css/dark-mode.css}"> &lt;!&ndash; Добавленный код &ndash;&gt;-->
+
+	<style>
+		/* Стили для темной темы */
+		.dark-theme {
+			background-color: #212121;
+			color: #ff8b00;
+		}
+
+		.dark-theme div {
+			background-color: #212121;
+		}
+
+		.dark-theme button {
+			background-color: #212121;
+			color: #eeeeee;
+		}
+	</style>
+</head>
+
+<body>
+	<div th:insert="fragments/header :: header"></div>
+
+	<div class="container my-2">
+		<div class="card">
+			<div class="card-body">
+				<div class="container my-5">
+					<div class="col-md-12">
+						Boozam search history
+						<div>
+							<table class="table table-striped table-responsive-md">
+								<thead>
+								<tr>
+									<th>#</th>
+									<th>ISBN</th>
+									<th>Book Name</th>
+									<th>Author</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr th:each="book : ${books}">
+									<td th:text="${book.getId()}"></td>
+									<td th:text="${book.getIsbn()}"></td>
+									<td th:text="${book.getTitle()}"></td>
+									<td th:text="${book.getAuthor()}"></td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<button id="darkThemeButton">Toggle Dark Theme</button>
+
+	<div>
+		<button id="increaseTextButton">Increase Text Size</button>
+		<button id="decreaseTextButton">Decrease Text Size</button>
+		<div id="currentTextSize"></div>
+	</div>
+
+	<button id="fontChangeButton">Change Font</button>
+
+
+	<script>
+		var darkThemeButton = document.getElementById('darkThemeButton');
+		var body = document.body;
+
+		darkThemeButton.addEventListener('click', function () {
+			body.classList.toggle('dark-theme');
+		});
+
+		var increaseTextButton = document.getElementById('increaseTextButton');
+		var decreaseTextButton = document.getElementById('decreaseTextButton');
+		var table = document.querySelector('table');
+		var currentTextSize = document.getElementById('currentTextSize');
+
+		increaseTextButton.addEventListener('click', function () {
+			var currentFontSize = parseFloat(getComputedStyle(table).fontSize);
+			table.style.fontSize = (currentFontSize + 1) + 'px';
+			currentTextSize.textContent = 'Current Text Size: ' + (currentFontSize + 1) + 'px';
+		});
+
+		decreaseTextButton.addEventListener('click', function () {
+			var currentFontSize = parseFloat(getComputedStyle(table).fontSize);
+			table.style.fontSize = (currentFontSize - 1) + 'px';
+			currentTextSize.textContent = 'Current Text Size: ' + (currentFontSize - 1) + 'px';
+		});
+
+		var fontChangeButton = document.getElementById('fontChangeButton');
+		var table = document.querySelector('table');
+
+		fontChangeButton.addEventListener('click', function () {
+			var currentFontFamily = getComputedStyle(table).fontFamily;
+			var newFontFamily = (currentFontFamily === 'Arial') ? 'Times New Roman' : 'Arial';
+			table.style.fontFamily = newFontFamily;
+		});
+	</script>
+
+</body>
+</html>

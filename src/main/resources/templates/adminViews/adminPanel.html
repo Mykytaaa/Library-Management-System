@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>All Books</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet"href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+
+</head>
+<body>
+<div th:insert="fragments/header :: header"></div>
+<div class="container my-2">
+    <div class="card">
+        <div class="card-body">
+            <div class="container my-5">
+                <div class="col-md-12">
+                    <div >
+                        <table class="table table-striped table-responsive-md">
+                            <thead>
+                            <tr>
+                                <th>ISBN </th>
+                                <th>Book Name</th>
+                                <th>Assigned Status</th>
+                                <th>Release</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="book : ${books}">
+                                <td th:text="${book.getIsbn()}"></td>
+                                <td th:text="${book.getName()}"></td>
+                                <td>
+                                    <div th:if="${book.getOwner() == null}">
+                                        <form th:method="PATCH" th:action="@{/user/{id}/assign(id=${book.getId()})}">
+                                            <button type="submit" class="btn btn-primary" disabled><i class="fas fa-person-times ml-2">Available</i></button>
+                                        </form>
+                                    </div>
+                                    <div th:if="${book.getOwner() != null && book.getOwner().getId() == person.getId()}">
+                                        <button type="button" class="btn btn-success" disabled>You took</button>
+                                    </div>
+                                    <div th:if="${book.getOwner() != null && book.getOwner().getId() != person.getId()}">
+                                        <button type="button" class="btn btn-danger" th:text="${book.getOwner().getFullName()}" disabled>N/A</button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div th:switch="${book.getOwner()}">
+                                        <div th:case="null"><button class="btn btn-primary" disabled><i class="fas fa-person-times ml-2"></i></button></div>
+                                        <div th:case="*">
+                                            <form th:action="@{/admin/{id}/release(id=${book.getId()})}" th:method="PATCH">
+                                                <button class="btn btn-primary" type="submit"><i class="fas fa-person-times ml-2"></i></button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:insert="fragments/footer :: footer"></div>
+</body>
+
+</html>

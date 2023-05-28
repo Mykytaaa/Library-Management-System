@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Home Page</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet"href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+</head>
+
+<body>
+<div th:insert="fragments/userHeader :: header"></div>
+
+<div id="map" style="height: 400px;"></div>
+
+<script>
+    var map = L.map('map').setView([54.8981, 23.9098], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+        maxZoom: 18,
+    }).addTo(map);
+
+    L.marker([54.900373, 23.916280]).addTo(map)
+        .bindPopup("VDU Library, V. Putvinskio g. 23, 44212 Kaunas")
+        .openPopup();
+
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Boozam</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/search.css}"/>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/index.js}"></script>
+</head>
+<body>
+<div class="topbar">
+    <h1 class="logo">
+        <a href="/user">BooZam</a>
+    </h1>
+</div>
+
+<div class="home-spacer">
+    <h1 class="page-title">BooZam a book</h1>
+
+    <form id="booksearch">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
+        <input name="query" type="text" placeholder="Search for a quote, text, or keywords">
+    </form>
+</div>
+
+<div class="bookmatch">
+</div>
+
+</body>
+</html>
