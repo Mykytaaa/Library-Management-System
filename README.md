@@ -1,5 +1,24 @@
-This is a complete documentation for a library management system, including the tech stack used, frontend and backend project structure, user and admin views, API usage, and backend authentication and authorization.
+TO SEE THE FULL DOCUMENTATION PLEASE FOLLOW THE LINK: https://drive.google.com/file/d/1VJSLkgLrNfYpKSDJkLjihaR1YTAEAceS/view?usp=drive_link
 
-The frontend tech stack uses JS as the programming language, Thymeleaf as the Java template engine, Bootstrap 4 as the CSS framework, and the Open Library API and Leaflet Maps API for APIs.
+# Installation and launch
 
-The backend uses Spring Core for dependency injection and inversion of control, Spring MVC as a web framework, Spring Data JPA for data access layer development, Spring Security for authentication and authorization, and Tomcat Server as the Java-based web server and servlet container.
+1. Install Java Development Kit (JDK) version 8 or higher.
+2. Install PostgreSQL and create a database for the project.
+3. Clone repository 
+
+```sql
+git clone <repository-url>
+```
+
+4. You will need IntelliJ IDEA(Ultimate version preferably) or Eclipse as IDE
+5. Create a scheme in Postgres
+6. Open src/main/sql/library_management_system.sql then open Postgres Console and copy paste the SQL code to get the tables created
+7. Set up your **application properties file** 
+
+```sql
+spring.datasource.url=jdbc:postgresql://<database-url>:<port>/<database-name>
+spring.datasource.username=<database-username>
+spring.datasource.password=<database-password>
+```
+
+8. Deploy your project
